@@ -1,0 +1,44 @@
+.main{
+    display: inline-flex;
+    
+}
+
+.box{  
+    background-color: rgb(228, 225, 225);
+    border-radius: 20px;
+    width: 300px;
+    margin-right: 10px;
+    margin-top: 10px;
+}
+
+.content{
+    background-color: rgb(255, 255, 255);
+    border-radius: 20px;
+    width: 280px;
+    margin: auto;
+    padding-left: 5px;
+}
+
+body{
+    white-space:nowrap;
+    overflow:scroll;
+    background-color: rgb(252, 252, 252);
+    background-image: linear-gradient(rgb(252, 252, 252), rgb(250, 198, 156));
+}
+
+.title{
+    margin-left: 10px;
+}
+
+.contentTitle{
+    margin-left: 10px;
+}
+
+.date{
+    font-size: 12px;
+    margin-left: 10px;
+    margin-top: -20px;
+    color: rgba(194, 193, 193, 0.849);
+    font-style: italic;
+}
+
