@@ -1,5 +1,4 @@
 function addContent(data){
-    //console.log(data);
     var content = document.createElement('div');
     content.className = 'content';
 
@@ -12,17 +11,23 @@ function addContent(data){
     var date = document.createElement('p');
     date.className = 'date';
     var textdate = document.createTextNode(data.createdAt);
-    date.appendChild(textdate);
+    
+    var desc = document.createElement('p');
+    desc.className = 'desc';
+    var textdesc = document.createTextNode('Desc: ' + data.desc);
+    desc.appendChild(textdesc);
 
+    date.appendChild(textdate);
     h4.appendChild(texth4);
     contentTitle.appendChild(h4);
     content.appendChild(contentTitle);
     content.appendChild(date);
+    content.appendChild(desc);
     document.getElementsByClassName("box")[data.listId - 1].appendChild(content);
 }
 
 
-function addElement(data, datacontent){
+function addElement(data, ){
     for (var i = 0; i < data.length; i++){
         var box  = document.createElement('div');
         box.className = 'box';
@@ -36,11 +41,6 @@ function addElement(data, datacontent){
         document.getElementsByClassName("main")[0].appendChild(box);
         //console.log(data[i]);
     }
-    
-    for (var i = 0; i < datacontent.length; i++){
-        //console.log(datacontent[i]);
-        addContent(datacontent[i]);
-    }
 }
 
 fetch('http://5e5e2557725f320014ed10b3.mockapi.io/lists')
@@ -48,17 +48,33 @@ fetch('http://5e5e2557725f320014ed10b3.mockapi.io/lists')
     return response.json();
   })
   .then((data) => {
-        fetch('http://5e5e2557725f320014ed10b3.mockapi.io/lists/2/tasks')
+      addElement(data);
+      for (let i = 0; i <= 3; i++){
+        fetch('http://5e5e2557725f320014ed10b3.mockapi.io/lists/'+ i +'/tasks')
         .then((response) => {
             return response.json();
         })
         .then((dataContent) => {
             console.log(dataContent);
-            addElement(data, dataContent);
-            
+            for (let j = 0; j < dataContent.length - 1; j++){
+                for (let k = j + 1 ; k < dataContent.length; k++){
+                    if (dataContent[j].order > dataContent[k].order){
+                        let tmp = dataContent[j];
+                        dataContent[j] = dataContent[k];
+                        dataContent[k] = tmp;
+                    }
+                }
+                // console.log(dataContent[j]);
+                // addContent(dataContent[j]);   
+            }
+            for (let j = 0;j < dataContent.length; j++){
+                    console.log(dataContent[j]);
+                    addContent(dataContent[j]);
+            }
         });
-    console.log(data);
-    //addElement(data);
+
+        console.log(data);
+    }  
 });
 
 
