@@ -1,3 +1,6 @@
+
+
+
 function addContent(data){
     var content = document.createElement('div');
     content.className = 'content';
@@ -27,7 +30,7 @@ function addContent(data){
 }
 
 
-function addElement(data, ){
+function addElement(data){
     for (var i = 0; i < data.length; i++){
         var box  = document.createElement('div');
         box.className = 'box';
@@ -35,9 +38,14 @@ function addElement(data, ){
         title.className = 'title';
         var h3 = document.createElement('h3');
         var texth3 = document.createTextNode(data[i].name);
+        
+        var add = document.createElement('button');
+        var textadd = document.createTextNode("Add more");
+        add.appendChild(textadd);
         h3.appendChild(texth3);
         title.appendChild(h3);
         box.appendChild(title);
+        box.appendChild(add);
         document.getElementsByClassName("main")[0].appendChild(box);
         //console.log(data[i]);
     }
@@ -49,7 +57,7 @@ fetch('http://5e5e2557725f320014ed10b3.mockapi.io/lists')
   })
   .then((data) => {
       addElement(data);
-      for (let i = 0; i <= 3; i++){
+      for (let i = 1; i <= 3; i++){
         fetch('http://5e5e2557725f320014ed10b3.mockapi.io/lists/'+ i +'/tasks')
         .then((response) => {
             return response.json();
